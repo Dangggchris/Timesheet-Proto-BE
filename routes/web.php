@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::resource('/projects', 'ProjectController');
+Route::resource('/dailytimesheet','DailyTimesheetController');
