@@ -1,51 +1,58 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\DailyTimesheet;
+use App\Http\Resources\DailyTimesheet as DailyTimesheetResource;
+use App\Http\Resources\DailyTimesheetCollection;
 use Illuminate\Http\Request;
 
 class DailyTimesheetController extends Controller
 {
-    //
-    public function create()
-    {
-        return view('createdailytimesheet');
-    }
-
-    public function store(Request $request) {
-        \App\DailyTimesheet::create([
-            'project_id' => $request->get('project_id'),
-            'user_id' => $request->get('user_id'),
-            'date' => $request->get('date'),
-            'hours' => $request->get('hours'),
-            'notes' => $request->get('notes'),
-        ]);
-
-        return redirect('/dailytimesheet');
-    }
-
+    // return all timesheets 
     public function index()
     {
-        // $dailytimesheet = \App\DailyTimesheet::all();
-        $dailytimesheet = DB::table('daily_timesheet_table')->get();
-
-        return response()
-                ->json($dailytimesheet);
-                // ->withCallback($request->input('callback'));
-
+        return new DailyTimesheetCollection(DailyTimesheet::all());
     }
 
-    public function update() 
+    //return timesheet using unique timesheet id
+    public function show($id)
     {
-        $data = request() -> validate([
-            'user_id' => 'required | integer',
-            'project_id' => 'required | integer',
-            'date' => 'required | date',
-            'hours' => 'required | numeric | between:1,3',
-            'notes' => '',
+        return new DailyTimesheetResource(DailyTimesheet::findOrFail($id));
+    }
+
+    public function store(Request $request)
+    {
+        $request -> validate([
+            'user_id' => 'required|integer',
+            'project_id' => 'required|integer',
+            'date' => 'required|date',
+            'hours' => 'required|numeric|between:0,24',
+            'notes' => 'string',
         ]);
 
-        $validator = Validator::make(Input::all(), $data);
-        // $data = DB::table('daily_timesheet_table')->where('user_id', )
+        $timesheet = DailyTimesheet::create($request->all());
+
+        return (new DailyTimesheetResource($timesheet))
+                ->response()
+                ->setStatusCode(201);
+    }
+
+
+    public function update($id, Request $request)
+    {
+        $request -> validate([
+            'user_id' => 'required|integer',
+            'project_id' => 'required|integer',
+            'date' => 'required|date',
+            'hours' => 'required|numeric|between:0,24',
+            'notes' => 'string',
+        ]);
+        
+        // uses unique id to find timesheet
+        $timesheet = DailyTimesheet::findOrFail($id);
+        $timesheet -> $request;
+        $timesheet->save();
+
+        return new DailyTimesheetResource($timesheet);
     }
 }

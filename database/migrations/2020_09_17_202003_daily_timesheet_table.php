@@ -18,6 +18,7 @@ class DailyTimesheetTable extends Migration
                 $table->integer('project_id');
                 $table->integer('user_id');
                 $table->text('date');
+                // limit of 3 total digits including 1 decimal digit
                 $table->float('hours', 3, 1);
                 $table->text('notes');
                 $table->timestamps();
