@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             'date' => 9/6/2020,
             'hours' => 3.0,
             'id' => '4',
+            'notes' => "hi",
         ]);
 
         DB::table('daily_timesheets')->insert([

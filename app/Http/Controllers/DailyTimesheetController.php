@@ -41,18 +41,17 @@ class DailyTimesheetController extends Controller
 
     public function update($id, Request $request)
     {
-        $request -> validate([
-            'user_id' => 'required|integer',
-            'project_id' => 'required|integer',
-            'date' => 'required|date',
+        // uses unique id to find timesheet
+        $timesheet = DailyTimesheet::findOrFail($id);
+
+        $this -> validate($request, [
             'hours' => 'required|numeric|between:0,24',
             'notes' => 'string',
         ]);
-        
-        // uses unique id to find timesheet
-        $timesheet = DailyTimesheet::findOrFail($id);
-        $timesheet -> $request;
-        $timesheet->save();
+
+        $input = $request->all();
+
+        $timesheet->fill($input)->save;
 
         return new DailyTimesheetResource($timesheet);
     }
