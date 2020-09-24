@@ -13,7 +13,7 @@ class DailyTimesheetTable extends Migration
      */
     public function up()
     {
-         Schema::create('dailytimesheet', function (Blueprint $table) {
+         Schema::create('daily_timesheets', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('project_id');
                 $table->integer('user_id');

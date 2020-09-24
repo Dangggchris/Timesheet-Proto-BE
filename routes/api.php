@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DailyTimesheetController;
+use App\Http\Controllers\ProjectsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,14 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/projects', [ProjectsController::class, 'index']);
 
-// Route::resource('/projects', 'ProjectController');
-// Route::resource('/dailytimesheet','DailyTimesheetController');
-Route::get('/projects', 'ProjectController@index');
-
-Route::get('/dailytimesheet', 'DailyTimesheetController@index');
-Route::get('/dailytimesheet/create', 'DailyTimesheetController@create');
-Route::post('/dailytimesheet', 'DailyTimesheetController@store');
-Route::get('dailytimesheet/{id}', 'DailyTimesheetController@show');
-Route::get('dailytimesheet/{id}/edit', 'DailyTimesheetController@edit');
-Route::post('/dailytimesheet/{id}', 'DailyTimesheetController@update');
+Route::get('/dailytimesheet', [DailyTimesheetController::class, 'index']);
+Route::post('/dailytimesheet', [DailyTimesheetController::class, 'store']);
+Route::get('dailytimesheet/{id}', [DailyTimesheetController::class, 'show']);
+Route::post('/dailytimesheet/{id}', [DailyTimesheetController::class, 'update']);
