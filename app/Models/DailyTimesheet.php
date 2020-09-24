@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class DailyTimesheet extends Model
 {
-    //  protected $fillable = [
-    //     'project_id',
-    //     'user_id',
-    //     'date',
-    //     'hours',
-    //     'notes',
-    // ];
+     protected $fillable = [
+        'project_id',
+        'user_id',
+        'date',
+        'hours',
+        'notes',
+    ];
 }
