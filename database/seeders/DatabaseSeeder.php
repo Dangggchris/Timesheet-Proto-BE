@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'DataSlate'
         ]);
         
-        DB::table('dailytimesheet')->insert([
+        DB::table('daily_timesheets')->insert([
             'user_id' => '1',
             'project_id' => '2',
             'date' => 9/2/2020,
@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'id' => '1',
         ]);
 
-        DB::table('dailytimesheet')->insert([
+        DB::table('daily_timesheets')->insert([
             'user_id' => '1',
             'project_id' => '2',
             'date' => 9/6/2020,
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             'id' => '4',
         ]);
 
-        DB::table('dailytimesheet')->insert([
+        DB::table('daily_timesheets')->insert([
             'user_id' => '1',
             'project_id' => '1',
             'date' => 9/1/2020,
@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
             'id' => '2',
         ]);
 
-        DB::table('dailytimesheet')->insert([
+        DB::table('daily_timesheets')->insert([
             'user_id' => '1',
             'project_id' => '1',
             'date' => 9/3/2020,

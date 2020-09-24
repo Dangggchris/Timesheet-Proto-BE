@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\DailyTimesheet;
+use App\Models\DailyTimesheet;
 use App\Http\Resources\DailyTimesheet as DailyTimesheetResource;
 use App\Http\Resources\DailyTimesheetCollection;
 use Illuminate\Http\Request;
+
 
 class DailyTimesheetController extends Controller
 {
