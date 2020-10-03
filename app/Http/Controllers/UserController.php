@@ -48,26 +48,27 @@ class UserController extends Controller
 
     // Once we got a valid user model
     // Create a Personnal Access Token
-    $tokenResult = $user->createToken('Personal Access Token');
+    // $tokenResult = $user->createToken($verifiedIdToken);
 
     // Store the created token
-    $token = $tokenResult->token;
+    // $token = $tokenResult->token;
+    $token= $idTokenString;
 
     // Add a expiration date to the token
-    $token->expires_at = Carbon::now()->addWeeks(1);
+    // $token->expires_at = Carbon::now()->addWeeks(1);
 
     // Save the token to the user
-    $token->save();
+    // $token->save();
 
     // Return a JSON object containing the token datas
     // You may format this object to suit your needs
     return response()->json([
-      'id' => $user->id,
-      'access_token' => $tokenResult->accessToken,
+      // 'id' => $user->id,
+      'access_token' => $token,
       'token_type' => 'Bearer',
-      'expires_at' => Carbon::parse(
-        $tokenResult->token->expires_at
-      )->toDateTimeString()
+      // 'expires_at' => Carbon::parse(
+      //   $token->expires_at
+      // )->toDateTimeString()
     ]);
   }
 }
