@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         DB::table('daily_timesheets')->insert([
             'user_id' => '1',
             'project_id' => '2',
-            'date' => 9/2/2020,
+            'date' => "2020-10-04",
             'hours' => 5.5,
             'id' => '1',
         ]);
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         DB::table('daily_timesheets')->insert([
             'user_id' => '1',
             'project_id' => '2',
-            'date' => 9/6/2020,
+            'date' => "2020-10-04",
             'hours' => 3.0,
             'id' => '4',
             'notes' => "hi",
@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
         DB::table('daily_timesheets')->insert([
             'user_id' => '1',
             'project_id' => '1',
-            'date' => 9/1/2020,
+            'date' => "2020-09-28",
             'hours' => 7.2,
             'id' => '2',
         ]);
@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
         DB::table('daily_timesheets')->insert([
             'user_id' => '1',
             'project_id' => '1',
-            'date' => 9/3/2020,
+            'date' => "2020-09-30",
             'hours' => 8.5,
             'id' => '3',
         ]);
