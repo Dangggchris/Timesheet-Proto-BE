@@ -16,10 +16,7 @@ class User extends Authenticatable
     use HasApiTokens, Notifiable;
 
     public function projects(){
-        return $this->belongsToMany(Projects::class,
-            'create_projects_users_table',
-            'user_id',
-            'projects_id');
+        return $this->belongsToMany(Projects::class)->withPivot('project_id');
     }
 
     /**

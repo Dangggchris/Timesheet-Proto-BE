@@ -73,6 +73,10 @@ class UserController extends Controller
   }
 
   public function getProjects($id){
-    return User::all($id)->projects;
+    $users = User::all($id);
+    
+    foreach($users as $user){
+      $user->projects;
+    }
   }
 }

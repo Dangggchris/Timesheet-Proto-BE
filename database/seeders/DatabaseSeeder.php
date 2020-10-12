@@ -23,6 +23,22 @@ class DatabaseSeeder extends Seeder
             'id' => '2',
             'name' => 'DataSlate'
         ]);
+        DB::table('projects')->insert([
+            'id' => '3',
+            'name' => 'TESTPROJECT'
+        ]);
+        DB::table('projects_users')->insert([
+            'user_id' => '1',
+            'project_id' => '2',
+        ]);
+        DB::table('projects_users')->insert([
+            'user_id' => '1',
+            'project_id' => '1',
+        ]);
+        DB::table('projects_users')->insert([
+            'user_id' => '1',
+            'project_id' => '3',
+        ]);
         
         DB::table('daily_timesheets')->insert([
             'user_id' => '1',

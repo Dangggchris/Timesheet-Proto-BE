@@ -10,13 +10,11 @@ class Projects extends Model
 {
 
     public function users(){
-        return $this->belongsToMany(User::class,
-            'create_projects_users_table',
-            'projects_id',
-            'user_id');
+        return $this->belongsToMany(User::class);
     }
 
     protected $fillable = [
         'name',
     ];
+
 }

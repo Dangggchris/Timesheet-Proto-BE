@@ -16,12 +16,12 @@ class CreateProjectsUsersTable extends Migration
         Schema::create('projects_users', function (Blueprint $table) {
             $table->bigIncrements('id');        
             $table->string('user_id');
-            $table->foreign('user_id')
+            $table->foreignId('user_id')
                 ->references('id')
                 ->on('users')->onDelete('cascade');
 
-            $table->string('projects_id');
-            $table->foreign('projects_id')
+            $table->string('project_id');
+            $table->foreignId('project_id')
                 ->references('id')
                 ->on('projects')->onDelete('cascade');
             });
