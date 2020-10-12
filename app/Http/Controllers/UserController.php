@@ -38,10 +38,10 @@ class UserController extends Controller
     }
 
     // Retrieve the UID (User ID) from the verified Firebase credential's token
-    $uid = $verifiedIdToken->getClaim('sub');
+    // $uid = $verifiedIdToken->getClaim('sub');
 
     // Retrieve the user model linked with the Firebase UID
-    $user = User::where('firebaseUID', $uid)->first();
+    // $user = User::where('firebaseUID', $uid)->first();
 
     // Here you could check if the user model exist and if not create it
     // For simplicity we will ignore this step

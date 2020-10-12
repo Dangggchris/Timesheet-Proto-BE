@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Projects;
+
 use Laravel\Passport\HasApiTokens;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -12,6 +14,13 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
+
+    public function projects(){
+        return $this->belongsToMany(Projects::class,
+            'create_projects_users_table',
+            'user_id',
+            'projects_id');
+    }
 
     /**
      * The attributes that are mass assignable.
