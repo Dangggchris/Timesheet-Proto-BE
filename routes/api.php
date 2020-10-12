@@ -24,6 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/projects', [ProjectsController::class, 'index']);
+Route::get('/projects/{userID}', [UserController::class, 'getProjects']);
 
 Route::get('/dailytimesheet', [DailyTimesheetController::class, 'index']);
 Route::get('/dailytimesheet/{userID}/{date}', [DailyTimesheetController::class, 'allTimesheetForOneUser']);

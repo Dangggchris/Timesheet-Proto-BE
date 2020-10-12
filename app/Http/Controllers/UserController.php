@@ -71,4 +71,8 @@ class UserController extends Controller
       // )->toDateTimeString()
     ]);
   }
+
+  public function getProjects($id){
+    return User::all($id)->projects;
+  }
 }
