@@ -2,19 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Model;
+use App\Models\Projects;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
-class ProjectFactory extends Factory
+class ProjectsFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Model::class;
+    protected $model = Projects::class;
 
     /**
      * Define the model's default state.
