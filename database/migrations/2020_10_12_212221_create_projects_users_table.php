@@ -14,16 +14,15 @@ class CreateProjectsUsersTable extends Migration
     public function up()
     {
         Schema::create('projects_users', function (Blueprint $table) {
-            $table->bigIncrements('id');        
-            $table->string('user_id');
-            $table->foreignId('user_id')
-                ->references('id')
-                ->on('users')->onDelete('cascade');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('projects_id');
+            $table->timestamps();
 
-            $table->string('project_id');
-            $table->foreignId('project_id')
-                ->references('id')
-                ->on('projects')->onDelete('cascade');
+            $table->unique(['user_id','projects_id']);
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('projects_id')->references('id')->on('projects')->onDelete('cascade');
             });
     }
 

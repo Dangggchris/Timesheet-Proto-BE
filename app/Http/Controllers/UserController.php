@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Firebase\Auth\Token\Exception\InvalidToken;
 
+use App\Http\Resources\Projects as ProjectsResource;
+use App\Http\Resources\ProjectsCollection;
+
 use App\Models\User;
 
 use Carbon\Carbon;
@@ -72,11 +75,9 @@ class UserController extends Controller
     ]);
   }
 
-  public function getProjects($id){
-    $users = User::all($id);
+  public function getProjects($userID){
     
-    foreach($users as $user){
-      $user->projects;
-    }
+    return new ProjectsCollection(Projects::where('user_id', $userID)
+    ->get());
   }
 }
