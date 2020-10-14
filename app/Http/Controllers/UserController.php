@@ -9,6 +9,7 @@ use App\Http\Resources\Projects as ProjectsResource;
 use App\Http\Resources\ProjectsCollection;
 
 use App\Models\User;
+use App\Models\Projects;
 
 use Carbon\Carbon;
 
@@ -77,7 +78,7 @@ class UserController extends Controller
 
   public function getProjects($userID){
     
-    return new ProjectsCollection(Projects::where('user_id', $userID)
+    return new ProjectsCollection(Projects::where('id', $userID)
     ->get());
   }
 }

@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\User;
+use App\Models\DailyTimesheet;
 use App\Models\Projects;
 
-class UserTableSeeder extends Seeder
+class DailyTimesheetSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,8 +16,9 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         //
-        $user = User::factory()->count(3)
-        ->hasAttached(Projects::factory()->count(2))
+        $timesheet = DailyTimesheet::factory()->count(10)
+        ->has(Projects::factory()->count(2))
         ->create();
+
     }
 }

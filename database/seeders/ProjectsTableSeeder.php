@@ -16,8 +16,8 @@ class ProjectsTableSeeder extends Seeder
     public function run()
     {
         //
-        $projects = Projects::factory()->count(10)
-        ->has(User::factory()->count(5))
+        $projects = Projects::factory()->count(3)
+        ->has(User::factory()->count(2))
         ->create();
     }
 }

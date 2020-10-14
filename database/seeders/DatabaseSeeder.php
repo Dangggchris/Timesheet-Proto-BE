@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserTableSeeder::class);
         $this->call(ProjectsTableSeeder::class);
+        $this->call(DailyTimesheetSeeder::class);
         // Project Seed
         // DB::table('projects')->insert([
         //     'id' => '1',
