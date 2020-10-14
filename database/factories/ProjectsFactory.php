@@ -25,7 +25,7 @@ class ProjectsFactory extends Factory
     {
         return [
             //
-            'name' => $this->faker->name,
+            'name' => $this->faker->word,
         ];
     }
 }

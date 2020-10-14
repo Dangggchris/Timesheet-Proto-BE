@@ -28,8 +28,8 @@ class DailyTimesheetFactory extends Factory
     {
         return [
             //
-            'project_id' => Projects::factory(),
-            'user_id' => User::factory(),
+            // 'projects_id' => Projects::factory(),
+            // 'user_id' => User::factory(),
             'date' => $this->faker->date,
             'hours' => $this->faker->numberBetween($min = 1, $max = 24),
             'notes'=> $this->faker->text($maxNbChars = 10),

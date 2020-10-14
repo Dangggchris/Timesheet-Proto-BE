@@ -15,8 +15,8 @@ class DailyTimesheet extends Model
     }
 
      protected $fillable = [
-        'project_id',
-        'user_id',
+        // 'projects_id',
+        // 'user_id',
         'date',
         'hours',
         'notes',

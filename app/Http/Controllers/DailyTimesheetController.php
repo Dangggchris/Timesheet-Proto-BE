@@ -32,8 +32,8 @@ class DailyTimesheetController extends Controller
     public function store(Request $request)
     {
         $request -> validate([
-            'user_id' => 'required|integer',
-            'project_id' => 'required|integer',
+            // 'user_id' => 'required|integer',
+            // 'project_id' => 'required|integer',
             'date' => 'required|date',
             'hours' => 'required|numeric|between:0,24',
             'notes' => 'string',

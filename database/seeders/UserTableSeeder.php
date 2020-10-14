@@ -16,8 +16,9 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         //
-        $user = User::factory()->count(3)
-        ->hasAttached(Projects::factory()->count(2))
+        $user = User::factory()
+        ->hasAttached(Projects::factory()
+        ->count(3))
         ->create();
     }
 }

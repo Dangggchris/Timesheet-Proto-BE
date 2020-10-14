@@ -16,8 +16,9 @@ class DailyTimesheetSeeder extends Seeder
     public function run()
     {
         //
-        $timesheet = DailyTimesheet::factory()->count(10)
-        ->has(Projects::factory()->count(2))
+        $timesheet = DailyTimesheet::factory()
+        ->count(3)
+        ->has(Projects::factory())
         ->create();
 
     }
