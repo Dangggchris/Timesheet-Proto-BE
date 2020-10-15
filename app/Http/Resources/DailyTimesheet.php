@@ -16,7 +16,7 @@ class DailyTimesheet extends JsonResource
     {
         return [
             'id' => $this->id,
-            'projects_id' => $this->project_id,
+            'projects_id' => $this->projects_id,
             'user_id' => (int) $this->user_id,
             'date' => (string) $this->date,
             'hours' => (int) $this->hours,
