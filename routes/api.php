@@ -27,7 +27,7 @@ Route::get('/projects', [ProjectsController::class, 'index']);
 Route::get('/projects/{userID}', [UserController::class, 'getProjects']);
 
 Route::get('/dailytimesheet', [DailyTimesheetController::class, 'index']);
-Route::get('/dailytimesheet/userid={userID}/projectid={projectID}/{date}', [DailyTimesheetController::class, 'allTimesheetForOneUser']);
+Route::get('/dailytimesheet/userid={userID}/{date}', [DailyTimesheetController::class, 'allTimesheetForOneUserForDay']);
 // Route::post('/dailytimesheet', [DailyTimesheetController::class, 'store']);
 Route::get('dailytimesheet/{id}', [DailyTimesheetController::class, 'show']);
 Route::put('/dailytimesheet/userid={userID}/projectid={projectID}', [DailyTimesheetController::class, 'updateOrCreate']);

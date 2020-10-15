@@ -16,10 +16,9 @@ class DailyTimesheetController extends Controller
     }
 
     // return all specific timesheets using a user_id and date
-    public function allTimesheetForOneUser($userID, $projectID, $date)
+    public function allTimesheetForOneUserForDay($userID, $date)
     {
         return new DailyTimesheetCollection(DailyTimesheet::where('user_id', $userID)
-        ->where('projects_id', $projectID)
         ->where('date', $date)
         ->get());
     }
