@@ -58,8 +58,8 @@ class DailyTimesheetController extends Controller
 
         // uses unique id to find timesheet
         $timesheet = DailyTimesheet::updateOrCreate(
-            [ 'user_id' => $userID, 'projects_id' => $projectID ],
-            [ 'hours' => $hours, 'date' => $date ]
+            [ 'user_id' => $userID, 'projects_id' => $projectID, 'date' => $date  ],
+            [ 'hours' => $hours ]
         );
 
         return new DailyTimesheetResource($timesheet);
