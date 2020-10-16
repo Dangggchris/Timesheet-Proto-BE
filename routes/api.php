@@ -24,9 +24,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/projects', [ProjectsController::class, 'index']);
+Route::get('/projects/{userID}', [UserController::class, 'getProjects']);
 
 Route::get('/dailytimesheet', [DailyTimesheetController::class, 'index']);
-Route::get('/dailytimesheet/{userID}/{date}', [DailyTimesheetController::class, 'allTimesheetForOneUser']);
-Route::post('/dailytimesheet', [DailyTimesheetController::class, 'store']);
+Route::get('/dailytimesheet/userid={userID}/{date}', [DailyTimesheetController::class, 'allTimesheetForOneUserForDay']);
+// Route::post('/dailytimesheet', [DailyTimesheetController::class, 'store']);
 Route::get('dailytimesheet/{id}', [DailyTimesheetController::class, 'show']);
-Route::post('/dailytimesheet/{id}', [DailyTimesheetController::class, 'update']);
+Route::put('/dailytimesheet/userid={userID}/projectid={projectID}', [DailyTimesheetController::class, 'updateOrCreate']);

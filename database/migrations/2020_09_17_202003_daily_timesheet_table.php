@@ -15,8 +15,8 @@ class DailyTimesheetTable extends Migration
     {
          Schema::create('daily_timesheets', function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('project_id');
-                $table->integer('user_id');
+                $table->integer('projects_id');
+                $table->string('user_id');
                 $table->string('date');
                 // limit of 3 total digits including 1 decimal digit
                 $table->float('hours', 3, 1);

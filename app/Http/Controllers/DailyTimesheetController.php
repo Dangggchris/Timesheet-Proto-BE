@@ -16,7 +16,7 @@ class DailyTimesheetController extends Controller
     }
 
     // return all specific timesheets using a user_id and date
-    public function allTimesheetForOneUser($userID, $date)
+    public function allTimesheetForOneUserForDay($userID, $date)
     {
         return new DailyTimesheetCollection(DailyTimesheet::where('user_id', $userID)
         ->where('date', $date)
@@ -47,19 +47,20 @@ class DailyTimesheetController extends Controller
     }
 
 
-    public function update($id, Request $request)
+    public function updateOrCreate($userID, $projectID, Request $request)
     {
+        // $this -> validate($request, [
+        //     'hours' => 'required|integer|between:0,24',
+        //     'notes' => 'string',
+        // ]);
+        $hours = $request -> input('hours');
+        $date = $request -> input('date');
+
         // uses unique id to find timesheet
-        $timesheet = DailyTimesheet::findOrFail($id);
-
-        $this -> validate($request, [
-            'hours' => 'required|numeric|between:0,24',
-            'notes' => 'string',
-        ]);
-
-        $input = $request->all();
-
-        $timesheet->fill($input)->save;
+        $timesheet = DailyTimesheet::updateOrCreate(
+            [ 'user_id' => $userID, 'projects_id' => $projectID, 'date' => $date  ],
+            [ 'hours' => $hours ]
+        );
 
         return new DailyTimesheetResource($timesheet);
     }
