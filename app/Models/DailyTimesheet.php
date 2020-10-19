@@ -10,10 +10,6 @@ class DailyTimesheet extends Model
 {
     use HasFactory;
 
-    public function projects(){
-        return $this->belongsToMany(Projects::class);
-    }
-
      protected $fillable = [
         'projects_id',
         'user_id',

@@ -14,12 +14,6 @@ class Projects extends Model
 
     public function users(){
         return $this->belongsToMany(User::class);
-        
-    }
-
-    public function dailyTimesheet(){
-        return $this->belongsToMany(DailyTimesheet::class);
-        
     }
 
     protected $fillable = [

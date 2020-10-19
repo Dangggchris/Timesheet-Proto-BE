@@ -20,7 +20,7 @@ class ProjectsTableSeeder extends Seeder
         $projects = Projects::factory()
         ->count(3)
         ->has(User::factory())
-        ->has(DailyTimesheet::factory())
+        // ->has(DailyTimesheet::factory())
         ->create();
     }
 }
