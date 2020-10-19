@@ -18,7 +18,6 @@ class DailyTimesheetSeeder extends Seeder
         //
         $timesheet = DailyTimesheet::factory()
         ->count(3)
-        ->has(Projects::factory())
         ->create();
 
     }
