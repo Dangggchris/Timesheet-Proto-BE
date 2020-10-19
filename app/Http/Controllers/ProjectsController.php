@@ -19,6 +19,6 @@ class ProjectsController extends Controller
     {
         $user = User::find($userID);
         
-        return $user = $user->projects->pluck('name');
+        return $user = $user->projects;
     }
 }
