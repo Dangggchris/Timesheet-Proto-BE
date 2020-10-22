@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Firebase\Auth\Token\Exception\InvalidToken;
+use \Firebase\JWT\JWT;
 
 use App\Http\Resources\Projects as ProjectsResource;
 use App\Http\Resources\ProjectsCollection;
@@ -25,7 +26,6 @@ class UserController extends Controller
     // Retrieve the Firebase credential's token
     $idTokenString = $request->input('Firebasetoken');
 
-
     try { // Try to verify the Firebase credential token with Google
 
       $verifiedIdToken = $auth->verifyIdToken($idTokenString);
@@ -41,44 +41,49 @@ class UserController extends Controller
       ], 401);
     }
 
-    // Retrieve the UID (User ID) from the verified Firebase credential's token
-    // $uid = $verifiedIdToken->getClaim('sub');
-
-    // Retrieve the user model linked with the Firebase UID
-    // $user = User::where('firebaseUID', $uid)->first();
-
-    // Here you could check if the user model exist and if not create it
-    // For simplicity we will ignore this step
-
-    // Once we got a valid user model
-    // Create a Personnal Access Token
-    // $tokenResult = $user->createToken($verifiedIdToken);
-
-    // Store the created token
-    // $token = $tokenResult->token;
     $token= $idTokenString;
 
-    // Add a expiration date to the token
-    // $token->expires_at = Carbon::now()->addWeeks(1);
+    $decoded = json_decode(base64_decode(str_replace('_', '/', str_replace('-', '+', explode('.', $token)[1]))));
 
-    // Save the token to the user
-    // $token->save();
+    $googleID = $decoded->user_id;
+    // $googleName = $decoded->displayName;
 
-    // Return a JSON object containing the token datas
-    // You may format this object to suit your needs
+    $user = User::firstOrCreate(
+      ['guid' => $googleID]
+    );
+
+    $user_id = $user->id;
+
     return response()->json([
-      // 'id' => $user->id,
+      'user_id' => $user_id,
       'access_token' => $token,
       'token_type' => 'Bearer',
       // 'expires_at' => Carbon::parse(
       //   $token->expires_at
       // )->toDateTimeString()
     ]);
+
+    
   }
 
+  // return all projects for user
   public function getProjects($userID){
     
     return new ProjectsCollection(Projects::where('id', $userID)
     ->get());
   }
+
+  // check database for google uid
+  // public function findOrCreateUser(Request $request) {
+
+  //   $guid = $request->uid;
+  //   $name = $request->displayName
+
+  //       $user = User::firstOrCreate(
+  //         ['guid' => $guid],
+  //         ['name' => $name]
+  //       );
+    
+  //       return $id = $user->id;
+  // }
 }
