@@ -54,16 +54,7 @@ class UserController extends Controller
 
     $user_id = $user->id;
 
-    return response()->json([
-      'user_id' => $user_id,
-      'access_token' => $token,
-      'token_type' => 'Bearer',
-      // 'expires_at' => Carbon::parse(
-      //   $token->expires_at
-      // )->toDateTimeString()
-    ]);
-
-    
+    return $user_id;
   }
 
   // return all projects for user

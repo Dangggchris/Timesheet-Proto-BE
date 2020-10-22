@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\DailyTimesheet;
-use App\Models\User;
 use App\Models\Projects;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -29,7 +28,7 @@ class DailyTimesheetFactory extends Factory
         return [
             //
             'projects_id' => Projects::factory(),
-            'user_id' => User::factory(),
+            'user_id' => $this->faker->unique()->numberBetween($min = 1, $max = 10),
             'date' => $this->faker->date,
             'hours' => $this->faker->numberBetween($min = 1, $max = 24),
             'notes'=> $this->faker->text($maxNbChars = 10),
