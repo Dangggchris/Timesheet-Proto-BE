@@ -41,7 +41,7 @@ class UserController extends Controller
       ], 401);
     }
 
-    $token= $idTokenString;
+    $token = $idTokenString;
 
     $decoded = json_decode(base64_decode(str_replace('_', '/', str_replace('-', '+', explode('.', $token)[1]))));
 
@@ -58,23 +58,10 @@ class UserController extends Controller
   }
 
   // return all projects for user
-  public function getProjects($userID){
-    
+  public function getProjects($userID)
+  {
+
     return new ProjectsCollection(Projects::where('id', $userID)
-    ->get());
+      ->get());
   }
-
-  // check database for google uid
-  // public function findOrCreateUser(Request $request) {
-
-  //   $guid = $request->uid;
-  //   $name = $request->displayName
-
-  //       $user = User::firstOrCreate(
-  //         ['guid' => $guid],
-  //         ['name' => $name]
-  //       );
-    
-  //       return $id = $user->id;
-  // }
 }
