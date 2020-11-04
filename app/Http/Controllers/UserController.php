@@ -52,6 +52,9 @@ class UserController extends Controller
       ['guid' => $googleID]
     );
 
+    // creates a relationship between new user and project 1 by default
+    $user->projects()->attach("1");
+
     $user_id = $user->id;
 
     return $user_id;
