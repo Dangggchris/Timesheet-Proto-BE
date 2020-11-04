@@ -53,7 +53,7 @@ class UserController extends Controller
     );
 
     // creates a relationship between new user and project 1 by default
-    // $user->projects()->attach("1");
+    $user->projects()->attach(1);
 
     $user_id = $user->id;
 
