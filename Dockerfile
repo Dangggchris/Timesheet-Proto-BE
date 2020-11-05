@@ -1,36 +1,49 @@
-FROM composer:1.9.0 as build
-WORKDIR /app
-COPY . /app
-RUN composer global require hirak/prestissimo && composer install
+FROM php:7.2-fpm
 
-FROM php:7.3-apache-stretch
-RUN docker-php-ext-install pdo pdo_mysql
+# Copy composer.lock and composer.json
+COPY composer.lock composer.json /var/www/
 
-EXPOSE 8080
-COPY --from=build /app /var/www/
-COPY docker/000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY .env.example /var/www/.env
-RUN chmod 777 -R /var/www/storage/ && \
-    echo "Listen 8080" >> /etc/apache2/ports.conf && \
-    chown -R www-data:www-data /var/www/ && \
-    a2enmod rewrite
+# Set working directory
+WORKDIR /var/www
 
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    locales \
+    zip \
+    jpegoptim optipng pngquant gifsicle \
+    vim \
+    unzip \
+    git \
+    curl
 
-FROM php:7.4-fpm-alpine
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN apk add --no-cache nginx supervisor wget
+# Install extensions
+RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
+RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
+RUN docker-php-ext-install gd
 
-RUN mkdir -p /run/nginx
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-COPY docker/nginx.conf /etc/nginx/nginx.conf
+# Add user for laravel application
+RUN groupadd -g 1000 www
+RUN useradd -u 1000 -ms /bin/bash -g www www
 
-RUN mkdir -p /app
-COPY . /app
+# Copy existing application directory contents
+COPY . /var/www
 
-RUN sh -c "wget http://getcomposer.org/composer.phar && chmod a+x composer.phar && mv composer.phar /usr/local/bin/composer"
-RUN cd /app && \
-    /usr/local/bin/composer install --no-dev
+# Copy existing application directory permissions
+COPY --chown=www:www . /var/www
 
-RUN chown -R www-data: /app
+# Change current user to www
+USER www
 
-CMD sh /app/docker/startup.sh
+# Expose port 9000 and start php-fpm server
+EXPOSE 9000
+CMD ["php-fpm"]
