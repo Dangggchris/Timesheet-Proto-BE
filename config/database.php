@@ -10,7 +10,7 @@ $password = $url["pass"];
 $db = substr($url["path"], 1);
 
 // $conn = new mysqli($server, $username, $password, $db);
-$conn = new PDO("mysql:host=$server;dbname=$db", $username, $password);
+// $conn = new PDO("mysql:host=$server;dbname=$db", $username, $password);
 return [
 
     /*
