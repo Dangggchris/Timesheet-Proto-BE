@@ -2,22 +2,14 @@
 
 use Illuminate\Support\Str;
 
-$url = getenv('JAWSDB_MARIA_URL');
-$dbparts = parse_url($url);
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-$hostname = $dbparts['host'];
-$username = $dbparts['user'];
-$password = $dbparts['pass'];
-$database = ltrim($dbparts['path'], '/');
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
 
-try {
-    $conn = new PDO("mysql:host=$hostname;dbname=$database", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully";
-} catch (PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-}
+$conn = new mysqli($server, $username, $password, $db);
 
 return [
 
@@ -63,9 +55,9 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => $url,
-            'host' =>  $hostname,
+            'host' =>  $server,
             'port' => '3306',
-            'database' => $database,
+            'database' => $db,
             'username' => $username,
             'password' => $password,
             'unix_socket' => env('DB_SOCKET', ''),
