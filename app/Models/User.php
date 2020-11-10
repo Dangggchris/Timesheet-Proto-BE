@@ -15,8 +15,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable, HasFactory;
 
-    public function projects(){
-        return $this->belongsToMany(Projects::class);
+    public function projects()
+    {
+        return $this->belongsToMany(Projects::class, 'projects_user', 'user_id', 'projects_id');
     }
 
     /**
