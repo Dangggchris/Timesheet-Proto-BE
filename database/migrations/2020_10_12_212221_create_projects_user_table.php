@@ -17,17 +17,14 @@ class CreateProjectsUserTable extends Migration
             $table->increments('id');
             // $table->primary(['user_id', 'projects_id']);
 
+            // $table->foreignId('projects_id')->constrained();
+            // $table->foreignId('user_id')->constrained();
+
             $table->unsignedInteger('projects_id');
             $table->foreign('projects_id')->references('id')->on('projects')->onDelete('cascade');
-            // $table->foreignId('projects_id')->constrained();
-            $table->foreignId('user_id')->constrained();
 
-            // $table->unsignedInteger('projects_id');
-            // $table->foreign('projects_id')->references('id')->on('projects')->onDelete('cascade');
-
-            // $table->unsignedBigInteger('user_id');
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
