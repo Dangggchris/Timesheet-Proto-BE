@@ -14,7 +14,7 @@ class Projects extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'projects_user', 'user_id', 'projects_id');
     }
 
     protected $fillable = [
