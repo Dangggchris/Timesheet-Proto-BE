@@ -15,9 +15,10 @@ class CreateProjectsUserTable extends Migration
     {
         Schema::create('projects_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->primary(['user_id', 'projects_id']);
+            // $table->primary(['user_id', 'projects_id']);
 
-            $table->foreignId('projects_id')->constrained();
+            $table->foreign('projects_id')->references('id')->on('projects')->onDelete('cascade');
+            // $table->foreignId('projects_id')->constrained();
             $table->foreignId('user_id')->constrained();
 
             // $table->unsignedBigInteger('projects_id');
